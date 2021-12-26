@@ -5,7 +5,6 @@ const app = Vue.createApp({
     };
   },
   watch: {
-      console.log("Watcher executing..");
     result() {
       const that = this;
       setTimeout(() => {
