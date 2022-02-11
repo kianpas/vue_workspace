@@ -9,6 +9,7 @@
       <li><strong>Phone:</strong> {{ phoneNumber }}</li>
       <li><strong>Email:</strong> {{ emailAddress }}</li>
     </ul>
+    <button @click="this.$emit('delete', id)">Delete</button>
   </li>
 </template>
 
@@ -32,16 +33,17 @@ export default {
       // },
     },
   },
-  emits: {
-    "toggle-favorite": function (id) {
-      if (id) {
-        return true;
-      } else {
-        console.log("id is missing");
-        return false;
-      }
-    },
-  },
+  emits: ["toggle-favorite", "delete"],
+  // emits: {
+  //   "toggle-favorite": function (id) {
+  //     if (id) {
+  //       return true;
+  //     } else {
+  //       console.log("id is missing");
+  //       return false;
+  //     }
+  //   },
+  // },
   data() {
     return {
       detailsAreVisible: false,
