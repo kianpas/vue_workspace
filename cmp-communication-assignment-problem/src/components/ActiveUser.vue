@@ -1,12 +1,17 @@
 <template>
-  <div>
-    <p>{{ name }}</p>
-    <p>{{ age }}</p>
-  </div>
+  <section>
+    <h2>{{ name }}</h2>
+    <h3>{{ age }}</h3>
+  </section>
 </template>
 
 <script>
 export default {
-  props: ["name", "age"],
+  props: {
+    name: { type: String, required: true },
+    age: { type: Number, required: true },
+  },
 };
 </script>
+
+<style></style>

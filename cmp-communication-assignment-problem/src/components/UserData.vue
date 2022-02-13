@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <form @submit.prevent="submitUser">
       <div>
         <label for="">name</label>
@@ -7,11 +7,11 @@
       </div>
       <div>
         <label for="">age</label>
-        <input type="text" v-model="enteredAge" />
+        <input type="number" v-model="enteredAge" />
       </div>
       <button>Submit</button>
     </form>
-  </div>
+  </section>
 </template>
 
 <script>

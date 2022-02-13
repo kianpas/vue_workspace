@@ -1,16 +1,14 @@
 <template>
   <div>
-    <ul>
-      <li>
-        <active-user
-          v-for="data in userData"
-          :key="data.id"
-          :id="data.id"
-          :name="data.name"
-          :age="data.age"
-        ></active-user>
-      </li>
-    </ul>
+    
+      <active-user
+        v-for="data in userData"
+        :key="data.id"
+        :id="data.id"
+        :name="data.name"
+        :age="data.age"
+      ></active-user>
+    
     <user-data @submit-user="submitUser"></user-data>
   </div>
 </template>
@@ -24,11 +22,10 @@ export default {
   },
   methods: {
     submitUser(name, age) {
-      console.log(name, age);
       const newUser = {
         id: new Date().toISOString(),
         name,
-        age,
+        age:+age,
       };
       this.userData.push(newUser);
     },
@@ -36,4 +33,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+html {
+  font-family: sans-serif;
+}
+section {
+  margin: 2rem auto;
+  max-width: 40rem;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+</style>
