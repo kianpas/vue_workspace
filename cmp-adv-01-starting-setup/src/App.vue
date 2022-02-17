@@ -11,13 +11,21 @@
 </template>
 
 <script>
+import TheHeader from "./components/TheHeader.vue";
+import UserInfo from "./components/UserInfo.vue";
+import BadgeList from "./components/BadgeList.vue";
 export default {
+  components: {
+    "the-header": TheHeader,
+    "user-info": UserInfo,
+    "badge-list": BadgeList,
+  },
   data() {
     return {
       activeUser: {
-        name: 'Maximilian Schwarzmüller',
-        description: 'Site owner and admin',
-        role: 'admin',
+        name: "Maximilian Schwarzmüller",
+        description: "Site owner and admin",
+        role: "admin",
       },
     };
   },
