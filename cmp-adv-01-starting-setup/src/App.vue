@@ -16,7 +16,10 @@
     </course-goals> -->
     <button @click="setSelectedComponent('active-goals')">Active Goals</button>
     <button @click="setSelectedComponent('manage-goals')">Manage Goals</button>
-    <component :is="selectedComponent"></component>
+    <!-- keep alive 아래의 컴포넌트 값은 캐시에 저장됨 -->
+    <keep-alive>
+      <component :is="selectedComponent"></component>
+    </keep-alive>
   </div>
 </template>
 
@@ -49,7 +52,6 @@ export default {
   methods: {
     setSelectedComponent(cmp) {
       this.selectedComponent = cmp;
-      console.log(this.selectedComponent);
     },
   },
 };
