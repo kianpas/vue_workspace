@@ -14,7 +14,6 @@
       </h2>
       <p>{{ slotProps.anotherProp }}</p>
     </course-goals> -->
-    <active-goals></active-goals>
     <button @click="setSelectedComponent('active-goals')">Active Goals</button>
     <button @click="setSelectedComponent('manage-goals')">Manage Goals</button>
     <component :is="selectedComponent"></component>
@@ -29,7 +28,6 @@ import TheHeader from "./components/TheHeader.vue";
 import ActiveGoals from "./components/ActiveGoals.vue";
 import ManageGoals from "./components/ManageGoals.vue";
 export default {
-  selectedComponent: "active-goals",
   components: {
     "the-header": TheHeader,
     // "user-info": UserInfo,
@@ -40,6 +38,7 @@ export default {
   },
   data() {
     return {
+      selectedComponent: "active-goals",
       activeUser: {
         name: "Maximilian Schwarzmüller",
         description: "Site owner and admin",
