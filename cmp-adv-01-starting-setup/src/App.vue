@@ -20,6 +20,7 @@
     <keep-alive>
       <component :is="selectedComponent"></component>
     </keep-alive>
+    
   </div>
 </template>
 
