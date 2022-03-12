@@ -1,13 +1,14 @@
 <template>
-  <button :type="type" :class="mode">
-      <slot></slot>
+  <!-- 타입의 경우 따로 입력할 필요 없음-->
+  <button :class="mode">
+    <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-    props:["type", "mode"]
-}
+  props: ['mode'],
+};
 </script>
 
 <style scoped>
