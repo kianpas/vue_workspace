@@ -6,7 +6,14 @@
     </div>
     <div class="form-control">
       <label for="age">Your Age (Years)</label>
-      <input id="age" name="age" type="number" />
+      <!-- v-model.number 로 타입 지정 가능-->
+      <input
+        id="age"
+        name="age"
+        type="number"
+        v-model.number="userAge"
+        ref="ageInfo"
+      />
     </div>
     <div class="form-control">
       <label for="referrer">How did you hear about us?</label>
@@ -57,12 +64,18 @@ export default {
   data() {
     return {
       userName: '',
+      userAge: null,
     };
   },
   methods: {
     submitForm() {
       console.log(this.userName);
-      this.userName
+      this.userName = '';
+      console.log(this.userAge);
+      //refs로 가져올 시 문자열로 받음
+      console.log(this.$refs.ageInput.value);
+      console.log(31);
+      this.userAge = null;
     },
   },
 };
