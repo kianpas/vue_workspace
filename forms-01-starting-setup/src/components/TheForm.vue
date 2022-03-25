@@ -100,7 +100,7 @@
       </div>
     </div>
     <div class="form-control">
-      <rating-control></rating-control>
+      <rating-control v-model="rating"></rating-control>
     </div>
     <div class="form-control">
       <input
@@ -130,6 +130,7 @@ export default {
       interest: [],
       how: null,
       confirm: false,
+      rating: null,
       userNameValidity: 'pending',
     };
   },
@@ -139,7 +140,7 @@ export default {
       this.userName = '';
       console.log(this.userAge);
       //refs로 가져올 시 문자열로 받음
-      console.log(this.$refs.ageInput.value);
+      // console.log(this.$refs.ageInput.value);
       this.userAge = null;
       console.log(this.referrer);
       this.referrer = 'google';
@@ -149,6 +150,8 @@ export default {
       this.how = null;
       console.log(this.confirm);
       this.confirm = false;
+      console.log(this.rating);
+      this.rating = null;
     },
     validateInput() {
       if (this.userName === '') {
