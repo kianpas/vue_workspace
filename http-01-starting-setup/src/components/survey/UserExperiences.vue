@@ -55,6 +55,10 @@ export default {
         });
     },
   },
+  //바로 메소드가 실행될 수 있도록함
+  mounted() {
+    this.loadExp();
+  },
 };
 </script>
 
