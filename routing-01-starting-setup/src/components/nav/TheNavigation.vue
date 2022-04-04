@@ -3,26 +3,15 @@
     <nav>
       <ul>
         <li>
-          <button @click="setActivePage('teams-list')">Teams</button>
+          <router-link to="/teams">Teams</router-link>
         </li>
         <li>
-          <button @click="setActivePage('users-list')">Users</button>
+          <router-link to="/users">Users</router-link>
         </li>
       </ul>
     </nav>
   </header>
 </template>
-
-<script>
-export default {
-  emits: ['set-page'],
-  methods: {
-    setActivePage(page) {
-      this.$emit('set-page', page);
-    },
-  },
-};
-</script>
 
 <style scoped>
 header {
@@ -49,7 +38,9 @@ li {
   margin: 0 2rem;
 }
 
-button {
+/* router-link 는 a 태그와 비슷 스타일링 가능 */
+a {
+  text-decoration: none;
   font: inherit;
   background: transparent;
   border: 1px solid transparent;
@@ -59,8 +50,8 @@ button {
   display: inline-block;
 }
 
-button:hover,
-button:active {
+a:hover,
+a:active {
   color: #f1a80a;
   border-color: #f1a80a;
   background-color: #1a037e;
