@@ -11,7 +11,11 @@ export default {
   props: ['id', 'name', 'memberCount'],
   computed: {
     teamMemberLink() {
-      return '/teams/' + this.id;
+      // return '/teams/' + this.id;
+      //문자열대신 name, param 전달 -> main의 children name, path 과 매칭
+      return { name: 'team-members', params: { teamId: this.id } };
+      //아래도 가능
+      //this.$router.push({ name: 'team-members', params: { teamId: this.id } });
     },
   },
 };

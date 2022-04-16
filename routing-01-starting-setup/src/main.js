@@ -13,9 +13,17 @@ const router = createRouter({
   routes: [
     { path: '/', redirect: '/teams' },
     {
+      name: 'teams',
       path: '/teams',
       component: TeamsList,
-      children: [{ path: ':teamId', component: TeamMembers, props: true }],
+      children: [
+        {
+          name: 'team-members',
+          path: ':teamId',
+          component: TeamMembers,
+          props: true,
+        },
+      ],
     }, //alias 방식은 url 변경 안됨, children -> nested route /teams/t1
     { path: '/users', component: UsersList },
 
