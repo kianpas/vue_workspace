@@ -12,10 +12,14 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', redirect: '/teams' },
-    { path: '/teams', component: TeamsList }, //alias 방식은 url 변경 안됨
+    {
+      path: '/teams',
+      component: TeamsList,
+      children: [{ path: ':teamId', component: TeamMembers, props: true }],
+    }, //alias 방식은 url 변경 안됨, children -> nested route /teams/t1
     { path: '/users', component: UsersList },
-    { path: '/teams/:teamId', component: TeamMembers, props: true },
-    { path: '/:notFound(.*)', component: NotFound }, //정의되지않은 url 전부
+
+    { path: '/:notFound(.*)', component: NotFound }, //정의되지않은 url 전부 notFound는 변경가능
   ],
   linkActiveClass: 'active',
 });
