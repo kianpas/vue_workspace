@@ -6,6 +6,8 @@ import TeamsList from './components/teams/TeamsList.vue';
 import UsersList from './components/users/UsersList.vue';
 import TeamMembers from './components/teams/TeamMembers.vue';
 import NotFound from './components/nav/NotFound.vue';
+import TeamsFooter from './components/teams/TeamsFooter.vue';
+import UsersFooter from './components/users/UsersFooter.vue';
 
 //props true로 props 값으로 라우팅 가능, props 방식이 재활용가능
 const router = createRouter({
@@ -15,7 +17,8 @@ const router = createRouter({
     {
       name: 'teams',
       path: '/teams',
-      component: TeamsList,
+      //한페이지내 보여질 여러 컴포넌트 지정 가능
+      components: { default: TeamsList, footer: TeamsFooter },
       children: [
         {
           name: 'team-members',
@@ -25,7 +28,7 @@ const router = createRouter({
         },
       ],
     }, //alias 방식은 url 변경 안됨, children -> nested route /teams/t1
-    { path: '/users', component: UsersList },
+    { path: '/users', components: { default: UsersList, footer: UsersFooter } },
 
     { path: '/:notFound(.*)', component: NotFound }, //정의되지않은 url 전부 notFound는 변경가능
   ],
