@@ -18,7 +18,7 @@ import UserItem from '../users/UserItem.vue';
 
 export default {
   inject: ['users', 'teams'],
-  props:["teamId"],
+  props: ['teamId'],
   components: {
     UserItem,
   },
@@ -46,6 +46,8 @@ export default {
   //컴포넌트 생성과 함께 실행
   created() {
     this.loadTeamMembers(this.teamId);
+    //쿼리 파람
+    console.log(this.$route.query);
   },
   //$route 변화 감지
   watch: {
