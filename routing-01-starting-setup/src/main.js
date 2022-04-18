@@ -33,6 +33,14 @@ const router = createRouter({
     { path: '/:notFound(.*)', component: NotFound }, //정의되지않은 url 전부 notFound는 변경가능
   ],
   linkActiveClass: 'active',
+  scrollBehavior(to, from, savedPosition) {
+    console.log(to, from, savedPosition);
+    //savedPosition 이전 페이지의 위치
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return { left: 0, top: 0 };
+  },
 });
 
 const app = createApp(App);
