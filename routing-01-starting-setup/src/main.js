@@ -34,13 +34,24 @@ const router = createRouter({
   ],
   linkActiveClass: 'active',
   scrollBehavior(to, from, savedPosition) {
-    console.log(to, from, savedPosition);
+    // console.log(to, from, savedPosition);
     //savedPosition 이전 페이지의 위치
     if (savedPosition) {
       return savedPosition;
     }
     return { left: 0, top: 0 };
   },
+});
+router.beforeEach(function (to, from) {
+  console.log('global');
+  console.log(to, from);
+  //next로 네비게이션 진행, next(false)로 방지 가능, 라우딩 문자열, 객체도 전달가능
+  //next();
+  // if (to.name === 'team-members') {
+  //   next();
+  // } else {
+  //   next({ name: 'team-members', param: { teamId: 't2' } });
+  // }
 });
 
 const app = createApp(App);
