@@ -28,7 +28,16 @@ const router = createRouter({
         },
       ],
     }, //alias 방식은 url 변경 안됨, children -> nested route /teams/t1
-    { path: '/users', components: { default: UsersList, footer: UsersFooter } },
+    //beforeEnter, beforeeach와 같은 가드역할, 특정 라우트에서만
+    {
+      path: '/users',
+      components: { default: UsersList, footer: UsersFooter },
+      beforeEnter(to, from, next) {
+        console.log('users beforeEnter');
+        console.log(to, from);
+        next();
+      },
+    },
 
     { path: '/:notFound(.*)', component: NotFound }, //정의되지않은 url 전부 notFound는 변경가능
   ],

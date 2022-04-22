@@ -49,6 +49,13 @@ export default {
     //쿼리 파람
     console.log(this.$route.query);
   },
+  //watch대신 사용 가능
+  beforeRouteUpdate(to, from, next) {
+    console.log('TeamMembers Comp beforeRouteUpdate');
+    console.log(to, from);
+    // this.loadTeamMembers(to.params.teamId);
+    next();
+  },
   //$route 변화 감지
   watch: {
     teamId(newId) {
