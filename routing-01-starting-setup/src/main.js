@@ -63,6 +63,13 @@ router.beforeEach(function (to, from) {
   // }
 });
 
+//라우트 다음 표현
+router.afterEach(function(to, from){
+  //sending analytics data
+  console.log("Global afterEach"); 
+  console.log(to, from);
+})
+
 const app = createApp(App);
 
 app.use(router);
