@@ -1,5 +1,6 @@
 <template>
   <button @click="confirmInput">Confirm</button>
+  <button @click="saveChanged">Save Change</button>
   <ul>
     <user-item
       v-for="user in users"
@@ -18,16 +19,35 @@ export default {
     UserItem,
   },
   inject: ['users'],
+  data() {
+    return { changeSaved: false };
+  },
   methods: {
     confirmInput() {
       //라우팅 기능
       this.$router.push('/teams');
     },
+    saveChanged() {
+      this.changeSaved = true;
+    },
   },
   beforeRouteEnter(to, from, next) {
-    console.log("userList Comp beforeRouteEnter");
+    console.log('userList Comp beforeRouteEnter');
     console.log(to, from);
     next();
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log('userList comp beforeRouteLeave');
+    console.log(to, from);
+    if (this.changeSaved) {
+      next();
+    } else {
+      const userWantsToLeave = confirm('Are you sure? you got unsaved changed');
+      next(userWantsToLeave);
+    }
+  },
+  unmounted() {
+    console.log('unmounted');
   },
 };
 </script>

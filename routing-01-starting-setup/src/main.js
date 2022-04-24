@@ -51,7 +51,7 @@ const router = createRouter({
     return { left: 0, top: 0 };
   },
 });
-router.beforeEach(function (to, from) {
+router.beforeEach(function (to, from, next) {
   console.log('global');
   console.log(to, from);
   //next로 네비게이션 진행, next(false)로 방지 가능, 라우딩 문자열, 객체도 전달가능
@@ -61,14 +61,15 @@ router.beforeEach(function (to, from) {
   // } else {
   //   next({ name: 'team-members', param: { teamId: 't2' } });
   // }
+  next();
 });
 
 //라우트 다음 표현
-router.afterEach(function(to, from){
+router.afterEach(function (to, from) {
   //sending analytics data
-  console.log("Global afterEach"); 
+  console.log('Global afterEach');
   console.log(to, from);
-})
+});
 
 const app = createApp(App);
 
