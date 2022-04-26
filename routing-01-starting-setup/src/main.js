@@ -17,6 +17,7 @@ const router = createRouter({
     {
       name: 'teams',
       path: '/teams',
+      meta: { needsAuth: true },
       //한페이지내 보여질 여러 컴포넌트 지정 가능
       components: { default: TeamsList, footer: TeamsFooter },
       children: [
@@ -54,6 +55,12 @@ const router = createRouter({
 router.beforeEach(function (to, from, next) {
   console.log('global');
   console.log(to, from);
+  if (to.meta.needsAuth) {
+    console.log('need auth!');
+    next();
+  } else {
+    next();
+  }
   //next로 네비게이션 진행, next(false)로 방지 가능, 라우딩 문자열, 객체도 전달가능
   //next();
   // if (to.name === 'team-members') {
