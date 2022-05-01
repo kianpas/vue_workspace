@@ -3,6 +3,13 @@
     <div class="block" :class="{ animate: animatedBlock }"></div>
     <button @click="animateBlock">Animate</button>
   </div>
+  <div class="container">
+    <transition>
+      <!-- transition 아래에 하나의 자식요소만 가능. 예외로 하나 이상인 경우는 나중에 -->
+      <p v-if="paraIsVisible">This is only sometime</p>
+    </transition>
+    <button @click="togglePara">Toggle Paragraph</button>
+  </div>
   <base-modal @close="hideDialog" v-if="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
@@ -18,11 +25,15 @@ export default {
     return {
       animatedBlock: false,
       dialogIsVisible: false,
+      paraIsVisible: false,
     };
   },
   methods: {
     animateBlock() {
       this.animatedBlock = true;
+    },
+    togglePara() {
+      this.paraIsVisible = !this.paraIsVisible;
     },
     showDialog() {
       this.dialogIsVisible = true;
@@ -80,6 +91,34 @@ button:active {
 .animate {
   /* transform: translateX(-150px); */
   animation: slide-fade 0.3s ease-out forwards;
+}
+
+.v-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.v-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.v-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.v-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.v-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 @keyframes slide-fade {
