@@ -5,7 +5,15 @@
   </div>
   <div class="container">
     <!--  enter-to-class="".. 등으로 지정 가능-->
-    <transition name="para">
+    <transition
+      name="para"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+    >
       <!-- transition 아래에 하나의 자식요소만 가능. 예외로 하나 이상인 경우는 나중에 -->
       <p v-if="paraIsVisible">This is only sometime</p>
     </transition>
@@ -18,10 +26,10 @@
       <button @click="hideUsers" v-else>Hide Users</button>
     </transition>
   </div>
-    <base-modal @close="hideDialog" :open="dialogIsVisible">
-      <p>This is a test dialog!</p>
-      <button @click="hideDialog">Close it!</button>
-    </base-modal>
+  <base-modal @close="hideDialog" :open="dialogIsVisible">
+    <p>This is a test dialog!</p>
+    <button @click="hideDialog">Close it!</button>
+  </base-modal>
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
@@ -34,14 +42,38 @@ export default {
       animatedBlock: false,
       dialogIsVisible: false,
       paraIsVisible: false,
-      userAreVisible : false
+      userAreVisible: false,
     };
   },
   methods: {
-    showUsers(){
+    beforeEnter(el) {
+      console.log('beforeEnter');
+      console.log(el);
+    },
+    beforeLeave(el) {
+      console.log('beforeLeave');
+      console.log(el);
+    },
+    enter(el) {
+      console.log('enter');
+      console.log(el);
+    },
+    afterEnter(el) {
+      console.log('afterEnter');
+      console.log(el);
+    },
+    leave(el){
+      console.log('leave');
+      console.log(el);
+    },
+    afterLeave(el){
+      console.log('afterLeave');
+      console.log(el);
+    },
+    showUsers() {
       this.userAreVisible = true;
     },
-    hideUsers(){
+    hideUsers() {
       this.userAreVisible = false;
     },
     animateBlock() {
@@ -115,7 +147,7 @@ button:active {
 
 .para-enter-active {
   /* transition: all 0.3s ease-out; */
-  animation: slide-scale 0.3s ease-out;
+  animation: slide-scale 2s ease-out;
 }
 
 .para-enter-to {
@@ -145,12 +177,12 @@ button:active {
 .fade-button-enter-active {
   transition: opacity 0.3s ease-out;
 }
-.fade-button-leave-active{
+.fade-button-leave-active {
   transition: opacity 0.3s ease-in;
 }
 
-.fade-button-enter-to, 
-.fade-button-leave-from{
+.fade-button-enter-to,
+.fade-button-leave-from {
   opacity: 1;
 }
 
@@ -167,6 +199,4 @@ button:active {
     transform: translateX(-150px) scale(1);
   }
 }
-
-
 </style>
