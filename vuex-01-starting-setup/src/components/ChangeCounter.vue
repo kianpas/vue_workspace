@@ -6,7 +6,7 @@
 export default {
   methods: {
     addOne() {
-      this.$store.commit('increase', { value: 1 });
+      this.$store.dispatch("increment");
     },
   },
 };
