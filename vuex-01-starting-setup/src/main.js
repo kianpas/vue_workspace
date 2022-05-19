@@ -24,7 +24,8 @@ const store = createStore({
       }, 2000);
     },
     increase(context, payload) {
-      context.commit('increment', payload);
+      console.log(context);
+      context.commit('increase', payload);
     },
   },
   getters: {
