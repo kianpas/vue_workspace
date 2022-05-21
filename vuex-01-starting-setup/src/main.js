@@ -5,6 +5,7 @@ import App from './App.vue';
 
 //모듈로 나눔
 const counterModule = {
+  //모듈로 나눠진 state는 로컬 취급
   state() {
     return {
       counter: 0,
@@ -15,6 +16,7 @@ const counterModule = {
       state.counter = state.counter + 1;
     },
     increase(state, payload) {
+      console.log(state);
       state.counter = state.counter + payload.value;
     },
   },
@@ -29,6 +31,12 @@ const counterModule = {
     },
   },
   getters: {
+    //로컬 모듈이므로 글로벌 state에 접근 불가능
+    //대신 rootState, rootGetter 로 접근 가능
+    testAuth(state, rootState, rootGetter){
+      console.log(rootState, rootGetter);
+      return state.isLoggedIn;
+    },
     finalCounter(state) {
       return state.counter * 2;
     },
