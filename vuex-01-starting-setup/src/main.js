@@ -5,6 +5,8 @@ import App from './App.vue';
 
 //모듈로 나눔
 const counterModule = {
+  //namespaced 으로 이름으로 구분
+  namespaced: true,
   //모듈로 나눠진 state는 로컬 취급
   state() {
     return {
@@ -33,7 +35,7 @@ const counterModule = {
   getters: {
     //로컬 모듈이므로 글로벌 state에 접근 불가능
     //대신 rootState, rootGetter 로 접근 가능
-    testAuth(state, rootState, rootGetter){
+    testAuth(state, rootState, rootGetter) {
       console.log(rootState, rootGetter);
       return state.isLoggedIn;
     },

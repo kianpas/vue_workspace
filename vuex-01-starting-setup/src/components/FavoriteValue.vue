@@ -6,7 +6,8 @@
 export default {
   computed: {
     counter() {
-      return this.$store.getters.normalizedCounter;
+      //네임스페이스/게터이름
+      return this.$store.getters["numbers/normalizedCounter"];
     },
   },
 };
