@@ -1,4 +1,4 @@
-import counterMutations from './mutations,s';
+import counterMutations from './mutations.js';
 import counterActions from './actions.js';
 import counterGetters from './getters.js';
 
