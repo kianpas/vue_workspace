@@ -19,7 +19,6 @@ import { mapGetters } from 'vuex';
 import ProductItem from '../components/products/ProductItem.vue';
 
 export default {
-  inject: ['products'],
   components: {
     ProductItem,
   },

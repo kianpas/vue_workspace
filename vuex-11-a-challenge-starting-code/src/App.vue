@@ -10,18 +10,7 @@ export default {
   components: {
     TheHeader,
   },
-
-  provide() {
-    return {
-      cart: this.cart,
-      addProductToCart: this.addProductToCart,
-      removeProductFromCart: this.removeProductFromCart,
-    };
-  },
-  methods: {
-  
-   
-  },
+  methods: {},
 };
 </script>
 

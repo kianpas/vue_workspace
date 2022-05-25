@@ -28,7 +28,6 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  inject: ['cart'],
   methods: {
     ...mapActions({
       login: 'login',
@@ -36,7 +35,7 @@ export default {
     }),
   },
   computed: {
-    ...mapGetters('cart', ['cartQty'], ""),
+    ...mapGetters('cart', ['cartQty']),
     isAuth() {
       return this.$store.getters.userIsAuth;
     },
