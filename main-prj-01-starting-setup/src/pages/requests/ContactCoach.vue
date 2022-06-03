@@ -4,11 +4,11 @@
       <label for="email">Your E-Mail</label>
       <input type="email" id="email" v-model.trim="email" />
     </div>
-    <div>
+    <div class="form-control">
       <label for="message">Message</label>
       <textarea id="message" rows="5" v-model.trim="message"></textarea>
     </div>
-    <p class="error" v-if="!formIsValid">
+    <p class="errors" v-if="!formIsValid">
       Please Enter a valid email and non-empty message.
     </p>
     <div class="actions">
@@ -29,9 +29,20 @@ export default {
   methods: {
     submitForm() {
       this.formIsValid = true;
-      if (this.email === '' || !this.email.includes('@') || this.message === '')
+      if (
+        this.email === '' ||
+        !this.email.includes('@') ||
+        this.message === ''
+      ) {
         this.formIsValid = false;
-      return;
+        return;
+      }
+      this.$store.dispatch('requests/contactCoach', {
+        email: this.email,
+        message: this.message,
+        coachId: this.$route.params.id,
+      });
+      this.$router.replace('/coaches');
     },
   },
 };
