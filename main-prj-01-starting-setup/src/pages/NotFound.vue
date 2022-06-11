@@ -1,13 +1,17 @@
 <template>
-  <h1>Nf</h1>
+  <section>
+    <base-card>
+      <h2>Page not Found</h2>
+      <p>
+        This page could not be found - maybe check out all our
+        <router-link to="/coaches">coaches</router-link>
+      </p></base-card
+    >
+  </section>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>
