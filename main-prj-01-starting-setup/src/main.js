@@ -20,3 +20,4 @@ app.component('base-spinner', BaseSpinner);
 app.component('base-dialog', BaseDialog);
 
 app.mount('#app');
+
