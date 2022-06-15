@@ -22,11 +22,11 @@ export default {
       throw error;
     }
 
-    context.commit('setLogin', {
+    context.commit('setUser', {
       token: responseData.idToken,
       userId: responseData.localId,
       tokenExpiration: responseData.expiresIn,
-    })
+    });
   },
   async signup(context, payload) {
     const apiKey = process.env.VUE_APP_API_KEY;
@@ -58,6 +58,13 @@ export default {
       token: responseData.idToken,
       userId: responseData.localId,
       tokenExpiration: responseData.expiresIn,
+    });
+  },
+  logout(context) {
+    context.commit('setUser', {
+      token: null,
+      userId: null,
+      tokenExpiration: null,
     });
   },
 };
