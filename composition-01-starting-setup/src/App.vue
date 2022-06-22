@@ -7,16 +7,23 @@
 
 <script setup>
 // import { ref } from 'vue';
-import { reactive } from 'vue';
+import { reactive, toRefs } from 'vue';
 
 //reactive는 객체만 가능
 const user = reactive({ name: 'Maximilian', age: 31 });
+// const uAge = ref(31);
 
 //동적 처리를 위해 ref 사용
 //ref로 저장하면 value 아래 저장됨
 // const uName = ref('Maximilian');
 // const uAge = ref(31);
 // const user = ref({ name: 'Maximilian', age: 31 });
+
+//ref화
+const userRefs = toRefs(user);
+
+console.log(userRefs.name);
+
 setTimeout(() => {
   //아래와 같이 변경 가능
   // uName.value = 'Max';
