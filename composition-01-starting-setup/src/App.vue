@@ -2,12 +2,13 @@
   <section class="container">
     <h2>{{ user.name }}</h2>
     <h3>{{ user.age }}</h3>
+    <button @click="setNewData">Change Age</button>
   </section>
 </template>
 
 <script setup>
 // import { ref } from 'vue';
-import { reactive, toRefs } from 'vue';
+import { reactive } from 'vue';
 
 //reactive는 객체만 가능
 const user = reactive({ name: 'Maximilian', age: 31 });
@@ -20,17 +21,13 @@ const user = reactive({ name: 'Maximilian', age: 31 });
 // const user = ref({ name: 'Maximilian', age: 31 });
 
 //ref화
-const userRefs = toRefs(user);
+// const userRefs = toRefs(user);
 
-console.log(userRefs.name);
+// console.log(userRefs.name);
 
-setTimeout(() => {
-  //아래와 같이 변경 가능
-  // uName.value = 'Max';
-  // uAge.value = '32';
-  user.name = 'Max';
+function setNewData() {
   user.age = 32;
-}, 2000);
+}
 </script>
 
 <style>
