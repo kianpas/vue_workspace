@@ -7,9 +7,9 @@
   <button @click="toggle">Toggle Goal</button>
   <!-- Task 3: Manage data in three ways -->
   <!-- => Separate refs -->
-  <p>{{ sepRef }}</p>
+  <p v-if="goalIsVisible">{{ sepRef }}</p>
   <!-- => Ref Object -->
-  <p>{{ user }}</p>
+  <p v-if="user.visible">{{ user }}</p>
   <!-- => Reactive Object -->
   <p>{{ obj }}</p>
   <!-- Task 4: Also solve the assignment with the Options API -->
@@ -17,15 +17,17 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-
+let goalIsVisible = ref(false);
 const courseGoal = ref('OUTPUT COURSE GOAL');
 const sepRef = ref('REFERENCE');
-const user = ref({ name: 'Maximilian', age: 31 });
+const user = ref({ name: 'Maximilian', age: 31, visible : false});
 const obj = reactive({ goal: 'goal', obj: 'obj' });
 function toggle() {
-  sepRef.value = 'toggle-favorite';
-  user.value.name = '1213';
-  obj.goal = '1213';
+  goalIsVisible.value = !goalIsVisible.value;
+  user.value.visible = !user.value.visible;
+  // sepRef.value = 'toggle-favorite';
+  // user.value.name = '1213';
+  // obj.goal = '1213';
 }
 </script>
 
