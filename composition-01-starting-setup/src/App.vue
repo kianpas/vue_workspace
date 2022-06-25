@@ -3,15 +3,35 @@
     <h2>{{ user.name }}</h2>
     <h3>{{ user.age }}</h3>
     <button @click="setNewData">Change Age</button>
+    <div>
+      <input type="text" placeholder="First Name" @input="setFirstName" />
+      <input type="text" placeholder="Last Name" @input="setLastName" />
+    </div>
+    <p>{{ uName }}</p>
   </section>
 </template>
 
 <script setup>
-// import { ref } from 'vue';
-import { reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 
 //reactive는 객체만 가능
 const user = reactive({ name: 'Maximilian', age: 31 });
+
+const firstName = ref('');
+const lastName = ref('');
+
+function setFirstName(event) {
+  firstName.value = event.target.value;
+}
+function setLastName(event) {
+  lastName.value = event.target.value;
+}
+
+//컴퓨트 함수
+const uName = computed(function () {
+  return firstName.value + ' ' + lastName.value;
+});
+
 // const uAge = ref(31);
 
 //동적 처리를 위해 ref 사용
