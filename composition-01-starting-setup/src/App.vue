@@ -4,8 +4,8 @@
     <h3>{{ user.age }}</h3>
     <button @click="setNewData">Change Age</button>
     <div>
-      <input type="text" placeholder="First Name" @input="setFirstName" />
-      <input type="text" placeholder="Last Name" @input="setLastName" />
+      <input type="text" placeholder="First Name" v-model="firstName" />
+      <input type="text" placeholder="Last Name" v-model="lastName" />
     </div>
     <p>{{ uName }}</p>
   </section>
@@ -17,15 +17,17 @@ import { ref, reactive, computed } from 'vue';
 //reactive는 객체만 가능
 const user = reactive({ name: 'Maximilian', age: 31 });
 
+
 const firstName = ref('');
 const lastName = ref('');
 
-function setFirstName(event) {
-  firstName.value = event.target.value;
-}
-function setLastName(event) {
-  lastName.value = event.target.value;
-}
+//v-model로도 바인딩 가능
+// function setFirstName(event) {
+//   firstName.value = event.target.value;
+// }
+// function setLastName(event) {
+//   lastName.value = event.target.value;
+// }
 
 //컴퓨트 함수
 const uName = computed(function () {
