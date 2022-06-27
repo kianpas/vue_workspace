@@ -2,6 +2,7 @@
   <section class="container">
     <h2>{{ user.name }}</h2>
     <h3>{{ user.age }}</h3>
+    <h3>{{ uAge }}</h3>
     <button @click="setNewData">Change Age</button>
     <div>
       <input type="text" placeholder="First Name" v-model="firstName" />
@@ -12,11 +13,10 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, watch } from 'vue';
 
 //reactive는 객체만 가능
 const user = reactive({ name: 'Maximilian', age: 31 });
-
 
 const firstName = ref('');
 const lastName = ref('');
@@ -29,12 +29,27 @@ const lastName = ref('');
 //   lastName.value = event.target.value;
 // }
 
+const uAge = ref(31);
+
+//watch
+watch(uAge, function (newValue, oldValue) {
+  console.log('old age : ' + oldValue);
+  console.log('new age : ' + newValue);
+});
+
+
+
 //컴퓨트 함수
 const uName = computed(function () {
   return firstName.value + ' ' + lastName.value;
 });
 
-// const uAge = ref(31);
+watch([uAge, uName], function (newValues, oldValues) {
+  console.log('old age : ' + oldValues[0]);
+  console.log('new age : ' + newValues[0]);
+  console.log('old name : ' + oldValues[1]);
+  console.log('new name : ' + newValues[1]);
+});
 
 //동적 처리를 위해 ref 사용
 //ref로 저장하면 value 아래 저장됨
@@ -49,6 +64,7 @@ const uName = computed(function () {
 
 function setNewData() {
   user.age = 32;
+  uAge.value = 32;
 }
 </script>
 
