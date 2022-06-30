@@ -6,7 +6,8 @@
     <button @click="setNewData">Change Age</button>
     <div>
       <input type="text" placeholder="First Name" v-model="firstName" />
-      <input type="text" placeholder="Last Name" v-model="lastName" />
+      <input type="text" placeholder="Last Name" ref="lastNameInput" />
+      <button @click="setLastName">Set Last Name</button>
     </div>
     <p>{{ uName }}</p>
   </section>
@@ -31,13 +32,14 @@ const lastName = ref('');
 
 const uAge = ref(31);
 
+const lastNameInput = ref(null);
+
+
 //watch
 watch(uAge, function (newValue, oldValue) {
   console.log('old age : ' + oldValue);
   console.log('new age : ' + newValue);
 });
-
-
 
 //컴퓨트 함수
 const uName = computed(function () {
@@ -50,6 +52,10 @@ watch([uAge, uName], function (newValues, oldValues) {
   console.log('old name : ' + oldValues[1]);
   console.log('new name : ' + newValues[1]);
 });
+
+function setLastName() {
+  lastName.value = lastNameInput.value.value;
+}
 
 //동적 처리를 위해 ref 사용
 //ref로 저장하면 value 아래 저장됨
