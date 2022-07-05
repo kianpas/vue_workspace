@@ -6,15 +6,16 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue';
+import { defineProps, defineEmits, computed, inject } from 'vue';
 
 const props = defineProps({
   firstName: String,
   lastName: String,
-  age: String,
 });
 
 const emit = defineEmits(['save-data']);
+
+const age = inject('userAge');
 
 console.log(props);
 console.log(emit);

@@ -1,10 +1,6 @@
 <template>
   <section class="container">
-    <user-data
-      :first-name="firstName"
-      :last-name="lastName"
-      :age="user.age"
-    ></user-data>
+    <user-data :first-name="firstName" :last-name="lastName"></user-data>
     <h3>{{ uAge }}</h3>
     <button @click="setNewData">Change Age</button>
     <div>
@@ -17,7 +13,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, watch } from 'vue';
+import { ref, reactive, computed, watch, provide } from 'vue';
 import UserData from './components/UserData.vue';
 
 //reactive는 객체만 가능
@@ -43,6 +39,8 @@ watch(uAge, function (newValue, oldValue) {
   console.log('old age : ' + oldValue);
   console.log('new age : ' + newValue);
 });
+
+provide('userAge', uAge);
 
 //컴퓨트 함수
 const uName = computed(function () {
