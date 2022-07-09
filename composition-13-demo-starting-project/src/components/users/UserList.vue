@@ -73,6 +73,7 @@ export default {
   methods: {
     updateSearch(val) {
       this.enteredSearchTerm = val;
+      console.log(this.enteredSearchTerm);
     },
     sort(mode) {
       this.sorting = mode;
