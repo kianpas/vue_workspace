@@ -25,73 +25,68 @@
   </base-container>
 </template>
 
-<script>
+<script setup>
+import { defineProps, defineEmits, ref, computed, watch } from 'vue';
 import UserItem from './UserItem.vue';
 
-export default {
-  components: {
-    UserItem,
-  },
-  props: ['users'],
-  emits: ['list-projects'],
-  data() {
-    return {
-      enteredSearchTerm: '',
-      activeSearchTerm: '',
-      sorting: null,
-    };
-  },
-  computed: {
-    availableUsers() {
-      let users = [];
-      if (this.activeSearchTerm) {
-        users = this.users.filter((usr) =>
-          usr.fullName.includes(this.activeSearchTerm)
-        );
-      } else if (this.users) {
-        users = this.users;
-      }
-      return users;
-    },
-    displayedUsers() {
-      if (!this.sorting) {
-        return this.availableUsers;
-      }
-      return this.availableUsers.slice().sort((u1, u2) => {
-        if (this.sorting === 'asc' && u1.fullName > u2.fullName) {
-          return 1;
-        } else if (this.sorting === 'asc') {
-          return -1;
-        } else if (this.sorting === 'desc' && u1.fullName > u2.fullName) {
-          return -1;
-        } else {
-          return 1;
-        }
-      });
-    },
-  },
-  methods: {
-    updateSearch(val) {
-      this.enteredSearchTerm = val;
-      console.log(this.enteredSearchTerm);
-    },
-    sort(mode) {
-      this.sorting = mode;
-    },
-    viewProjects($event) {
-      this.$emit('list-projects', $event);
-    },
-  },
-  watch: {
-    enteredSearchTerm(val) {
-      setTimeout(() => {
-        if (val === this.enteredSearchTerm) {
-          this.activeSearchTerm = val;
-        }
-      }, 300);
-    },
-  },
-};
+const props = defineProps({ users: Object });
+console.log(props);
+
+const users = ref(props.users);
+const emit = defineEmits(['list-projects']);
+const enteredSearchTerm = ref('default');
+const activeSearchTerm = ref('');
+const sorting = ref(null);
+
+const availableUsers = computed(function () {
+  let userArr = [];
+  if (activeSearchTerm.value) {
+    userArr = users.value.filter((usr) =>
+      usr.fullName.includes(this.activeSearchTerm)
+    );
+  } else if (users.value) {
+    userArr = users.value;
+  }
+  return userArr;
+});
+
+const displayedUsers = computed(function () {
+  if (!sorting.value) {
+    return availableUsers.value;
+  }
+  return availableUsers.value.slice().sort((u1, u2) => {
+    if (sorting.value === 'asc' && u1.fullName > u2.fullName) {
+      return 1;
+    } else if (sorting.value === 'asc') {
+      return -1;
+    } else if (sorting.value === 'desc' && u1.fullName > u2.fullName) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+});
+
+function updateSearch(val) {
+  enteredSearchTerm.value = val;
+  console.log(enteredSearchTerm.value);
+}
+
+function sort(mode) {
+  sorting.value = mode;
+}
+
+function viewProjects($event) {
+  emit('list-projects', $event);
+}
+
+watch(enteredSearchTerm, function (newValue) {
+  setTimeout(() => {
+    if (newValue === enteredSearchTerm.value) {
+      activeSearchTerm.value = newValue;
+    }
+  }, 300);
+});
 </script>
 
 <style scoped>

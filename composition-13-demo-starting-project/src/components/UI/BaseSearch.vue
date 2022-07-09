@@ -3,27 +3,24 @@
     <input
       type="search"
       @input="search"
-      :value="searchTerm.value"
+      :value="searchTerm"
       placeholder="Filter items"
     />
   </form>
 </template>
 
 <script>
-// import { defineProps, defineEmits, ref } from 'vue';
+// import { defineProps, defineEmits, ref} from 'vue';
 
 // const props = defineProps({ searchTerm: String });
 // console.log(props.searchTerm);
 // const searchTerm = ref(props.searchTerm);
-// console.log(searchTerm);
+// console.log(searchTerm.value);
 
-// const emit = defineEmits(['search']);
+// const emit = defineEmits(['searchTerm']);
 
 // function search(event) {
-//   console.log(props);
-//   console.log(searchTerm.value);
-//   console.log(event.target.value);
-//   emit('search', event.target.value);
+//   emit('searchTerm', event.target.value);
 // }
 
 export default {
