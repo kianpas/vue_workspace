@@ -30,19 +30,20 @@ import { defineProps, defineEmits, ref, computed, watch } from 'vue';
 import UserItem from './UserItem.vue';
 
 const props = defineProps({ users: Object });
-console.log(props);
 
 const users = ref(props.users);
 const emit = defineEmits(['list-projects']);
-const enteredSearchTerm = ref('default');
+const enteredSearchTerm = ref('');
 const activeSearchTerm = ref('');
 const sorting = ref(null);
 
+//users는 app에서 단순 객체로 전달했기 때문에 ref로도 접근 가능
+console.log(users);
 const availableUsers = computed(function () {
   let userArr = [];
   if (activeSearchTerm.value) {
     userArr = users.value.filter((usr) =>
-      usr.fullName.includes(this.activeSearchTerm)
+      usr.fullName.includes(activeSearchTerm.value)
     );
   } else if (users.value) {
     userArr = users.value;
@@ -69,7 +70,6 @@ const displayedUsers = computed(function () {
 
 function updateSearch(val) {
   enteredSearchTerm.value = val;
-  console.log(enteredSearchTerm.value);
 }
 
 function sort(mode) {

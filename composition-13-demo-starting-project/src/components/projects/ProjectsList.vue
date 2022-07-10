@@ -1,10 +1,10 @@
 <template>
+  <button @click=test>test</button>
   <base-container v-if="user">
-    <h2>{{ user.fullName }}: Projects</h2>
+    <h2>{{ props.user.fullName }}: Projects</h2>
     <base-search
-      v-if="hasProjects"
       @search="updateSearch"
-      :search-term="enteredSearchTerm"
+      :search-term="enteredSearchTerm.value"
     ></base-search>
     <ul v-if="hasProjects">
       <project-item
@@ -20,51 +20,50 @@
   </base-container>
 </template>
 
-<script>
+<script setup>
 import ProjectItem from './ProjectItem.vue';
 
-export default {
-  components: {
-    ProjectItem,
-  },
-  props: ['user'],
-  data() {
-    return {
-      enteredSearchTerm: '',
-      activeSearchTerm: '',
-    };
-  },
-  computed: {
-    hasProjects() {
-      return this.user.projects && this.availableProjects.length > 0;
-    },
-    availableProjects() {
-      if (this.activeSearchTerm) {
-        return this.user.projects.filter((prj) =>
-          prj.title.includes(this.activeSearchTerm)
-        );
-      }
-      return this.user.projects;
-    },
-  },
-  methods: {
-    updateSearch(val) {
-      this.enteredSearchTerm = val;
-    },
-  },
-  watch: {
-    enteredSearchTerm(val) {
-      setTimeout(() => {
-        if (val === this.enteredSearchTerm) {
-          this.activeSearchTerm = val;
-        }
-      }, 300);
-    },
-    user() {
-      this.enteredSearchTerm = '';
-    },
-  },
-};
+import { defineProps, ref, computed, watch, reactive} from 'vue';
+
+const props = defineProps({ user: Object });
+const user1 = reactive(props.user)
+// const user = ref(props.user)
+const enteredSearchTerm = ref('');
+const activeSearchTerm = ref('');
+
+const hasProjects = computed(function () {
+  return props.user.projects && availableProjects.value.length > 0;
+});
+
+const availableProjects = computed(function () {
+  if (activeSearchTerm.value) {
+    return props.user.projects.filter((prj) =>
+      prj.title.includes(activeSearchTerm.value)
+    );
+  }
+  return props.user.projects;
+});
+
+function test(){
+  console.log(typeof props);
+  console.log(typeof props.user);
+  console.log(props.user.projects);
+  console.log(typeof user1 );
+}
+
+function updateSearch(val) {
+  enteredSearchTerm.value = val;
+}
+
+watch([enteredSearchTerm], function (newValue) {
+  console.log(newValue[0]);
+  setTimeout(() => {
+    if (newValue[0] === enteredSearchTerm.value) {
+      activeSearchTerm.value = newValue[0];
+    }
+  }, 300);
+  // enteredSearchTerm.value = '';
+});
 </script>
 
 <style scoped>

@@ -17,6 +17,7 @@ const activeUsers = USER_DATA;
 
 const selectUser = (uid) => {
   selectedUser.value = activeUsers.find((usr) => usr.id === uid);
+  console.log(selectedUser.value);
 };
 </script>
 

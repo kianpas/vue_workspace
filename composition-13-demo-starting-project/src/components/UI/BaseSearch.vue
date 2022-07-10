@@ -3,36 +3,22 @@
     <input
       type="search"
       @input="search"
-      :value="searchTerm"
+      :modelValue="searchTerm"
       placeholder="Filter items"
     />
   </form>
 </template>
 
-<script>
-// import { defineProps, defineEmits, ref} from 'vue';
+<script setup>
+import { defineProps, defineEmits, ref } from 'vue';
 
-// const props = defineProps({ searchTerm: String });
-// console.log(props.searchTerm);
-// const searchTerm = ref(props.searchTerm);
-// console.log(searchTerm.value);
+const props = defineProps({ searchTerm: String });
+const searchTerm = ref(props.searchTerm);
+const emit = defineEmits(['search']);
 
-// const emit = defineEmits(['searchTerm']);
-
-// function search(event) {
-//   emit('searchTerm', event.target.value);
-// }
-
-export default {
-  props: ['searchTerm'],
-  emits: ['search'],
-  methods: {
-    search(event) {
-      console.log(this.searchTerm);
-      this.$emit('search', event.target.value);
-    },
-  },
-};
+function search(event) {
+  emit('search', event.target.value);
+}
 </script>
 
 <style scoped>
