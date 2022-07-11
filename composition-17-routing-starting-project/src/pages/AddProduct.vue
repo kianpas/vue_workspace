@@ -12,7 +12,11 @@
       </div>
       <div>
         <label for="description">Description</label>
-        <textarea rows="5" id="description" v-model="enteredDescription"></textarea>
+        <textarea
+          rows="5"
+          id="description"
+          v-model="enteredDescription"
+        ></textarea>
       </div>
       <button>Add Product</button>
     </form>
@@ -21,11 +25,12 @@
 
 <script>
 import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
   setup() {
     const addProduct = inject('addProduct');
-
+    const router = useRouter();
     const enteredTitle = ref('');
     const enteredPrice = ref(null);
     const enteredDescription = ref('');
@@ -36,6 +41,7 @@ export default {
         description: enteredDescription,
         price: enteredPrice,
       });
+      router.push('/product');
     }
 
     return {
