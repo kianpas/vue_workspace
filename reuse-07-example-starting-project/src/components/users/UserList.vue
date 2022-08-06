@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { ref, computed, toRefs } from 'vue';
 import UserItem from './UserItem.vue';
 import useSearch from '../../hooks/search';
 
@@ -64,8 +64,11 @@ export default {
     //   enteredSearchTerm.value = val;
     // }
 
+    //UserList는 ref가 아니고 ProjectList는 ref로 넘기고 있음
+    //변경
+    const { users } = toRefs(props);
     const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
-      props.users,
+      users,
       'fullName'
     );
 
