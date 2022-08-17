@@ -73,7 +73,7 @@ export default {
     // const user = propsWithRefs.user;
 
     watch(user, function () {
-      enteredSearchTerm.value = '';
+      updateSearch("");
     });
 
     // function updateSearch(val) {
