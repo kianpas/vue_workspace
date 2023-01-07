@@ -8,7 +8,10 @@ export default function useSearch(items, searchProp) {
     let filteredItems = [];
     if (activeSearchTerm.value) {
       filteredItems = items.value.filter((item) =>
-        item[searchProp].includes(activeSearchTerm.value)
+        item[searchProp]
+          .toString()
+          .toLowerCase()
+          .includes(activeSearchTerm.value)
       );
     } else if (items.value) {
       filteredItems = items.value;
@@ -19,7 +22,7 @@ export default function useSearch(items, searchProp) {
   watch(enteredSearchTerm, function (newValue) {
     setTimeout(() => {
       if (newValue === enteredSearchTerm.value) {
-        activeSearchTerm.value = newValue;
+        activeSearchTerm.value = newValue.toLowerCase();
       }
     }, 300);
   });

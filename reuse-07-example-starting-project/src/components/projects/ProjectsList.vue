@@ -2,7 +2,6 @@
   <base-container v-if="user">
     <h2>{{ user.fullName }}: Projects</h2>
     <base-search
-      v-if="hasProjects"
       @search="updateSearch"
       :search-term="enteredSearchTerm"
     ></base-search>
